@@ -27,7 +27,8 @@ postcode.state <- postcode.03 %>%
                                                 "South Australia" = "SA",
                                                 "Tasmania" = "TAS",
                                                 "Victoria"= "VIC",
-                                                "Western Australia" = "WA")))
+                                                "Western Australia" = "WA")),
+         Postcode = POA_NAME21)
 
 #leaflet() %>%
 #  addPolygons(data = postcode.03, color = 'blue', popup = postcode.03$STE_NAME21)
