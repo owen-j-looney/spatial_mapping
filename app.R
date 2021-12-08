@@ -21,7 +21,7 @@ library(tableHTML)
 setwd("~/Owen/R_git/spatial-mapping")
 postcode_data <- st_read("geometries/POSTCODE_2016_STATE.shp") %>%
   filter(!st_is_empty(.)) 
-# %>%  as("Spatial")
+
 
 
 Commonwelath_electorate_data <- st_read("geometries/CED_2016.shp") %>%  
