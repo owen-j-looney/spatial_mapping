@@ -1,0 +1,17 @@
+.navbar.navbar-default.navbar-static-top{ color: #fff; 
+                                                   font-size: 20px; 
+                                                   background-color: #fff ;}
+.navbar-default .navbar-brand { color: #2F3146; 
+                                                   font-size: 26px;
+                                                   font-family: 'Lato',verdana;
+                                                   background-color: #fff ;} 
+                                                   #sidebar {background-color: transparent;
+                                                   }
+.navbar-default .navbar-nav>li>a:focus, .navbar-default .navbar-nav>li>a:hover {
+                                                   color: #FFFFFF;
+                                                   background-color: #ED145B;
+                                                   }
+.navbar-nav > .active > a {
+                                                   color: #fff !important;
+                                                   background-color:#21BCBE !important;
+                                                   }

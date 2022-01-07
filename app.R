@@ -38,32 +38,12 @@ LGA_data <- st_read("geometries/LGA_2021_AUST_GDA2020.shp") %>%
 ui <- bootstrapPage(useWaiter(),
                     autoWaiter(),
                     use_waitress(),
-                    list(tags$head(tags$style(HTML("
-                                                   .navbar.navbar-default.navbar-static-top{ color: #fff; 
-                                                   font-size: 20px; 
-                                                   background-color: #fff ;}
-                                                   .navbar-default .navbar-brand { color: #2F3146; 
-                                                   font-size: 26px;
-                                                   font-family: 'Lato',verdana;
-                                                   background-color: #fff ;} 
-                                                   #sidebar {background-color: transparent;
-                                                   }
-                                                   .navbar-default .navbar-nav>li>a:focus, .navbar-default .navbar-nav>li>a:hover {
-                                                   color: #FFFFFF;
-                                                   background-color: #ED145B;
-                                                   }
-                                                   .navbar-nav > .active > a {
-                                                   color: #fff !important;
-                                                   background-color:#21BCBE !important;
-                                                   }
-                                                   
-                                                   
-                                                   ")))),
+                    tags$head(tags$link(rel = "stylesheet", type = "text/css", href = "styles.css")),
                     setBackgroundImage(
-                      src = "images/background1.jpg"), #https://www.yourtown.com.au/sites/all/themes/yourtown/imgs/bg-markers.svg"),
+                      src = "images/Simple-Background-Image.jpg"), #https://www.yourtown.com.au/sites/all/themes/yourtown/imgs/bg-markers.svg"),
                     navbarPage(
                       windowTitle = "Owen Looney - Mapping example",
-                      title = div(img(src = 'images/blue-shiny-background.svg', # https://yourtown.com.au/sites/all/themes/yourtown/yourtown-logo.svg',
+                      title = div(img(src = 'images/owen.jpeg', # https://yourtown.com.au/sites/all/themes/yourtown/yourtown-logo.svg',
                                       style = "margin-top: -14px;
                                       padding-right:10px;
                                       padding-bottom:5px",
@@ -100,7 +80,7 @@ ui <- bootstrapPage(useWaiter(),
                                  ),
                                  mainPanel(width = 9 ,
                                            tabsetPanel(
-                                             tabPanel("Map",leafletOutput("map", height = "800px")),
+                                             tabPanel("Map",leafletOutput("map")),#, height = "700px")),
                                              tabPanel("Data",dataTableOutput("datatable", height = "800px"))
                                            )))),
                       tabPanel("About",
