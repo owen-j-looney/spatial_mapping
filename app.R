@@ -31,7 +31,7 @@ Commonwelath_electorate_data <- st_read("geometries/CED_2016.shp") %>%
 LGA_data <- st_read("geometries/LGA_2021_AUST_GDA2020.shp") %>%  
   filter(!st_is_empty(.))
 
-
+waste_data <- read_xls("Data/WasteManagementFacilities_v1.1.xls")
 
 
 
@@ -48,16 +48,11 @@ ui <- bootstrapPage(useWaiter(),
                                       padding-right:10px;
                                       padding-bottom:5px",
                                       height = 55)),
-                      fluid = T,
+                      fluid = TRUE,
                       tabPanel("Home",
                                sidebarLayout(
                                  sidebarPanel(id = "sidebar",
                                               width = 3,
-                                              selectInput("School_Type", 
-                                                          label = "School type:",
-                                                          choices = NULL, 
-                                                          #selected = c("SPECIAL"), 
-                                                          multiple = TRUE),
                                               selectInput("State", 
                                                           label = "State:", 
                                                           choices = unique(postcode_data$State), 
@@ -68,11 +63,11 @@ ui <- bootstrapPage(useWaiter(),
                                                              choices = NULL, 
                                                              multiple = TRUE),
                                               setSliderColor(c("#EB008B"),1),
-                                              sliderInput("ICSEA_score",
-                                                          label = "2020 ICSEA Percentile:",
-                                                          min = 0,
-                                                          max = 100,
-                                                          value = c(0,100)),
+                                              sliderInput("Area_SQ_KM_21",
+                                                          label = "Postcode area in Km^2:",
+                                                          min = min(postcode_data$AREASQKM21),
+                                                          max = max(postcode_data$AREASQKM21),
+                                                          value = c(min(postcode_data$AREASQKM21),max(postcode_data$AREASQKM21))),
                                               actionButton("data_refresh", "Click to load Map",
                                                            style="color: #fff; background-color: #21BCBE",
                                                            width = '100%'),
@@ -115,7 +110,7 @@ server <- function(input,output,session) {
     if(!is.null(input$State)) {
       postcode_filtered <- postcode_filtered %>% filter(State %in% input$State)
     }
-    postcode_filtered
+    postcode_filtered %>% filter(between(AREASQKM21,input$Area_SQ_KM_21[1],input$Area_SQ_KM_21[2]))
   })
   
   electorate_data_react <- reactive({
